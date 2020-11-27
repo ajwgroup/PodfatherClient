@@ -1,0 +1,25 @@
+{
+  "id": 76534,
+  "customer": 1234,
+  "name": "Test Site",
+  "address1": "1 Test Lane",
+  "address2": "2 Test Lane",
+  "address3": "3 Test Lane",
+  "city": "Edinburgh",
+  "region": "East Lothian",
+  "postcode": "EH12 9DQ",
+  "contact": "Jason Smith",
+  "phone": "0131 553 0400",
+  "email": "email@site.com",
+  "accountNumber": "Pf01234",
+  "accountNumber2": "Pf56789",
+  "country": "GB",
+  "coordinate": {
+    "latitude": 55.93402,
+    "longitude": -3.30967
+  },
+  "autoEmail": true,
+  "etaEmailNotifications": true,
+  "etaSmsNotifications": false,
+  "active": true
+}

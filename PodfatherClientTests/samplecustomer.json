@@ -1,0 +1,15 @@
+{
+  "name": "Test Customer",
+  "address1": "1 Test Lane",
+  "address2": "2 Test Lane",
+  "address3": "3 Test Lane",
+  "city": "Edinburgh",
+  "region": "East Lothian",
+  "postcode": "EH12 9DQ",
+  "country": "GB",
+  "phone": "0131 553 0400",
+  "email": "email@customer.com",
+  "accountNumber": "01234",
+  "accountNumber2": "56789",
+  "autoEmail": true
+}

@@ -1,0 +1,32 @@
+﻿{
+  "id": 1,
+  "cosmeticId": 2,
+  "job": 3,
+  "customer": 4,
+  "site": 5,
+  "depot": 6,
+  "driver": 7,
+  "run": 8,
+  "date": "2019-01-01T00:00:00+00:00",
+  "template": 9,
+  "fields": [
+    {
+      "id": 123,
+      "fieldId": 234,
+      "value": "Test Value"
+    }
+  ],
+  "items": {
+    "data": [
+      {
+        "id": 12345,
+        "data": [
+          {
+            "fieldName": "Field Name",
+            "fieldValue": "Field Value"
+          }
+        ]
+      }
+    ]
+  }
+}

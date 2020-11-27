@@ -1,0 +1,33 @@
+﻿{
+  "site": 76534,
+  "customer": 89354,
+  "depot": 9543,
+  "template": 123,
+  "run": 241,
+  "dueByStart": "2018-01-01T00:00:00+00:00",
+  "dueBy": "2018-01-01T00:00:00+00:00",
+  "instructions1": "Knock front door",
+  "instructions2": "Knock side door",
+  "provisional": true,
+  "dropTime": 5,
+  "price": 10.22,
+  "fields": {
+    "Field Name": "Field Value"
+  },
+  "items": [
+    {
+      "name": "Box",
+      "merchGroup": "Bags",
+      "productCode": "PROD001",
+      "price": 10.22,
+      "weight": 11.55,
+      "quantity": 5
+    }
+  ],
+  "customItems": [
+    {
+      "tab": 1234,
+      "Item Template Field Name": "Item Template Field Value"
+    }
+  ]
+}
