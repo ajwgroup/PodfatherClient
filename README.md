@@ -5,6 +5,3 @@ Available on NuGet
 
 https://www.nuget.org/packages/PodfatherClient
 
-
-
-
