@@ -121,16 +121,16 @@ namespace PodfatherClient
             }
         }
 
-        public async Task<IEnumerable<Site>> GetSitesAsync(long customerId)
+        public async Task<List<Site>> GetSitesAsync(long customerId)
         {
             using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
             {
-                HttpResponseMessage responseMessage = await client.GetAsync(String.Format("/v1/sites/?customer={0}", customerId)).ConfigureAwait(false);
+                HttpResponseMessage responseMessage = await client.GetAsync(String.Format("/v1/sites?customer={0}", customerId)).ConfigureAwait(false);
 
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     var responseJson = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject<IEnumerable<SiteContainer>>(responseJson).Select(e => e.Site);
+                    return JsonConvert.DeserializeObject<SitesContainer>(responseJson).Sites;
                 }
                 else
                 {

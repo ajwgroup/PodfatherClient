@@ -196,7 +196,7 @@ namespace PodfatherClientTests
             client.SetLogger(GetLogger());
 
             var sites = Task.Run(async () => await client.GetSitesAsync(customerId).ConfigureAwait(false)).Result;
-            var site = sites.First();
+            var site = sites.FirstOrDefault(e => e.Id == 3943512);
             site.Name.Should().Be("AVIA TECHNIQUE LTD");
             site.Phone.Should().Be("");
             site.Postcode.Should().Be("");
