@@ -121,6 +121,25 @@ namespace PodfatherClient
             }
         }
 
+        public async Task<IEnumerable<Site>> GetSitesAsync(long customerId)
+        {
+            using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
+            {
+                HttpResponseMessage responseMessage = await client.GetAsync(String.Format("/v1/sites/?customer={0}", customerId)).ConfigureAwait(false);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var responseJson = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    return JsonConvert.DeserializeObject<IEnumerable<SiteContainer>>(responseJson).Select(e => e.Site);
+                }
+                else
+                {
+                    LogDebug("GetSitesAsync|Received response code: " + responseMessage.StatusCode);
+                    throw new HttpResponseException(responseMessage);
+                }
+            }
+        }
+
         public async Task<IEnumerable<Customer>> GetCustomersAsync(int pageNumber = 0, string name = "")
         {
             var nameFilter = "";

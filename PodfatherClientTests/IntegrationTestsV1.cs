@@ -188,6 +188,37 @@ namespace PodfatherClientTests
             site.EtaSmsNotifications.Should().Be(null);
         }
 
+        [TestMethod]
+        public void GetSitesAsync_PassId_ReturnObject()
+        {
+            var customerId = 1286862;
+            var client = new PodfatherClientV1(GetAPIKey());
+            client.SetLogger(GetLogger());
+
+            var sites = Task.Run(async () => await client.GetSitesAsync(customerId).ConfigureAwait(false)).Result;
+            var site = sites.First();
+            site.Name.Should().Be("AVIA TECHNIQUE LTD");
+            site.Phone.Should().Be("");
+            site.Postcode.Should().Be("");
+            site.Region.Should().Be("UNITED KINGDOM");
+            site.AccountNumber.Should().Be(null);
+            site.AccountNumber2.Should().Be(null);
+            site.Active.Should().Be(true);
+            site.Address1.Should().Be("UNIT 3 FISHPONDS ESTATE");
+            site.Address2.Should().Be("FISHPONDS ROAD");
+            site.Address3.Should().Be("WOKINGHAM");
+            site.AutoEmail.Should().Be(false);
+            site.City.Should().Be("BERKSHIRE RG41 2QJ");
+            site.Contact.Should().Be("");
+            site.Coordinate.Latitude.Should().Be(null);
+            site.Coordinate.Longitude.Should().Be(null);
+            site.Country.Should().Be("GB");
+            site.Customer.Should().Be(1286862);
+            site.Email.Should().Be("");
+            site.EtaEmailNotifications.Should().Be(null);
+            site.EtaSmsNotifications.Should().Be(null);
+        }
+
 
         [TestMethod]
         public void GetCustomersAsync_PassName_ReturnObjectsContaining()
