@@ -289,7 +289,7 @@ namespace PodfatherClientTests
                 Depot = 39645, // Test Depot
                 Site = 15067072, // WIND ROSE AVIATION COMPANY LTD
                 Instructions1 = "Integration Test Please Ignore",
-                Template = 1594, // DELIVERY ORDER
+                Template = 1594, // AJW DELIVERY ORDER
                 DueBy = DateTime.Now.AddDays(10),
                 Items = new List<NewJobItemsData>()
                 {
@@ -298,14 +298,20 @@ namespace PodfatherClientTests
                         Name = "IntegrationTest",
                         Quantity = 1
                     }
-                }
+                },
+                Fields = new Dictionary<string, string>()
             };
+
+            testJob.Fields.Add("Despatch Note Number", "TestValue");
 
             var client = new PodfatherClientV1(GetAPIKey());
             client.SetLogger(GetLogger());
 
             var result = Task.Run(async () => await client.CreateJobAsync(testJob).ConfigureAwait(false)).Result;
             result.Id.Should().BeGreaterThan(0);
+            result.OrderRef.Should().NotBeNullOrEmpty();
+            result.JobFields.JobFieldsData.FirstOrDefault().Name.Should().Be("Despatch Note Number");
+            result.JobFields.JobFieldsData.FirstOrDefault().Value.Should().Be("TestValue");
 
             var deleteResult = Task.Run(async () => await client.DeleteJobAsync(result.Id).ConfigureAwait(false)).Result;
             deleteResult.Should().BeTrue();

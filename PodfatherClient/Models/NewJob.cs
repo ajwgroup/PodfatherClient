@@ -95,5 +95,8 @@ namespace PodfatherClient.Models
         ///</summary>
         [JsonProperty("items", NullValueHandling = NullValueHandling.Ignore)]
         public List<NewJobItemsData> Items { get; set; }
+        [JsonProperty("fields", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, string> Fields { get; set; }
+
     }
 }
