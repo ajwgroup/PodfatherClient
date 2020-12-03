@@ -24,6 +24,9 @@
     <None Update="samplecreatedjob.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="samplecreatedjobwithfields.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="samplecustomer.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

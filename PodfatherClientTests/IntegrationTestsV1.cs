@@ -308,12 +308,11 @@ namespace PodfatherClientTests
             client.SetLogger(GetLogger());
 
             var result = Task.Run(async () => await client.CreateJobAsync(testJob).ConfigureAwait(false)).Result;
-            result.Id.Should().BeGreaterThan(0);
-            result.OrderRef.Should().NotBeNullOrEmpty();
+            result.Job.Job.Id.Should().BeGreaterThan(0);
             result.JobFields.JobFieldsData.FirstOrDefault().Name.Should().Be("Despatch Note Number");
             result.JobFields.JobFieldsData.FirstOrDefault().Value.Should().Be("TestValue");
 
-            var deleteResult = Task.Run(async () => await client.DeleteJobAsync(result.Id).ConfigureAwait(false)).Result;
+            var deleteResult = Task.Run(async () => await client.DeleteJobAsync(result.Job.Job.Id).ConfigureAwait(false)).Result;
             deleteResult.Should().BeTrue();
 
         }

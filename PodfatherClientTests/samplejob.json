@@ -1,44 +1,23 @@
 ﻿{
-  "id": 90000,
-  "deleted": false,
-  "cosmeticId": 10293,
-  "site": 76534,
-  "customer": 89354,
-  "depot": 9543,
-  "run": 241,
-  "instructions1": "Use the front entrance.",
-  "instructions2": "Beware of the cat.",
-  "provisional": false,
-  "orderRef": "Order Reference",
-  "orderRef2": "Order Reference 2",
-  "dueByStart": "2018-01-01T00:00:00+00:00",
-  "dueBy": "2018-01-01T00:00:00+00:00",
-  "dropTime": 5,
-  "price": 10.22,
-  "createdAt": "2018-01-01T00:00:00+00:00",
-  "receivedByHandheld": "2018-01-01T00:00:00+00:00",
-  "template": 5,
-  "fields": {
-    "data": [
-      {
-        "id": 123,
-        "fieldId": 234,
-        "name": "Test Name",
-        "value": "Test Value"
-      }
-    ]
-  },
-  "items": {
-    "data": [
-      {
-        "id": 123,
-        "name": "Box",
-        "merchGroup": "Bags",
-        "productCode": "PROD001",
-        "price": 10.22,
-        "weight": 11.55,
-        "quantity": 5
-      }
-    ]
+  "data": {
+    "id": 534975555,
+    "deleted": false,
+    "cosmeticId": 87536,
+    "site": 15067072,
+    "customer": 832825,
+    "depot": 39645,
+    "run": 0,
+    "instructions1": "Integration Test Please Ignore",
+    "instructions2": "",
+    "orderRef": "",
+    "orderRef2": "",
+    "dueByStart": null,
+    "dueBy": "2020-12-06T10:32:30+00:00",
+    "createdAt": "2020-12-03T09:07:49+00:00",
+    "receivedByHandheld": null,
+    "provisional": false,
+    "dropTime": 0,
+    "template": 1594,
+    "price": 0
   }
 }

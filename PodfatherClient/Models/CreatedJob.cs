@@ -8,6 +8,12 @@ namespace PodfatherClient.Models
     public class CreatedJob
     {
         [JsonProperty("job")]
-        public JobContainer JobContainer { get; set; }
+        public Jobs Job { get; set; }
+        [JsonProperty("fields")]
+        public JobFields JobFields { get; set; }
+
+        [JsonProperty("items")]
+        public JobItems JobItems { get; set; }
+
     }
 }

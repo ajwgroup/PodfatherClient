@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PodfatherClient.Models
 {
-    public class JobContainer
+    public class Jobs
     {
         [JsonProperty("data")]
         public Job Job { get; set; }

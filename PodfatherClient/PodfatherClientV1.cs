@@ -217,7 +217,7 @@ namespace PodfatherClient
             }
         }
 
-        public async Task<Job> CreateJobAsync(NewJob job)
+        public async Task<CreatedJob> CreateJobAsync(NewJob job)
         {
             using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
             {
@@ -227,7 +227,7 @@ namespace PodfatherClient
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     var responseJson = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject<CreatedJob>(responseJson).JobContainer.Job;
+                    return JsonConvert.DeserializeObject<CreatedJob>(responseJson);
                 }
                 else
                 {
@@ -286,7 +286,7 @@ namespace PodfatherClient
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     var responseJson = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject<JobContainer>(responseJson).Job;
+                    return JsonConvert.DeserializeObject<Jobs>(responseJson).Job;
                 }
                 else
                 {

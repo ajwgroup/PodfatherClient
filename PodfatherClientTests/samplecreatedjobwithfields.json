@@ -1,0 +1,45 @@
+﻿{
+  "job": {
+    "data": {
+      "id": 534625795,
+      "deleted": false,
+      "cosmeticId": 87526,
+      "site": 15067072,
+      "customer": 832825,
+      "depot": 39645,
+      "run": 0,
+      "instructions1": "Integration Test Please Ignore",
+      "instructions2": "",
+      "orderRef": "",
+      "orderRef2": "",
+      "dueByStart": null,
+      "dueBy": "2020-12-12T04:00:37+00:00",
+      "createdAt": "2020-12-02T16:00:38+00:00",
+      "receivedByHandheld": null,
+      "provisional": false,
+      "dropTime": 0,
+      "template": 1594,
+      "price": 0
+    }
+  },
+  "fields": {
+    "data": [
+      {
+        "id": 10879620355,
+        "fieldId": 25506,
+        "name": "Despatch Note Number",
+        "value": "TestValue"
+      }
+    ]
+  },
+  "items": {
+    "data": [
+      {
+        "id": 2566541865,
+        "name": "IntegrationTest",
+        "quantity": 1,
+        "qtyDecimalPlaces": 0
+      }
+    ]
+  }
+}

@@ -86,11 +86,5 @@ namespace PodfatherClient.Models
 
         [JsonProperty("template")]
         public long Template { get; set; }
-
-        [JsonProperty("fields")]
-        public JobFields JobFields { get; set; }
-
-        [JsonProperty("items")]
-        public JobItems JobItems { get; set; }
     }
 }
