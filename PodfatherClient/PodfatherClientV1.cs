@@ -221,7 +221,7 @@ namespace PodfatherClient
         {
             using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
             {
-                String json = JsonConvert.SerializeObject(job, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssK" });
+                String json = JsonConvert.SerializeObject(job, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssZ" });
                 HttpResponseMessage responseMessage = await client.PostAsync("/v1/jobs", new StringContentWithoutCharset(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (responseMessage.IsSuccessStatusCode)
@@ -241,7 +241,7 @@ namespace PodfatherClient
         {
             using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
             {
-                String json = JsonConvert.SerializeObject(newSite, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssK" });
+                String json = JsonConvert.SerializeObject(newSite, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssZ" });
                 HttpResponseMessage responseMessage = await client.PostAsync("/v1/sites", new StringContentWithoutCharset(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (responseMessage.IsSuccessStatusCode)
@@ -261,7 +261,7 @@ namespace PodfatherClient
         {
             using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
             {
-                String json = JsonConvert.SerializeObject(newCustomer, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssK" });
+                String json = JsonConvert.SerializeObject(newCustomer, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssZ" });
                 HttpResponseMessage responseMessage = await client.PostAsync("/v1/customers", new StringContentWithoutCharset(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
                 if (responseMessage.IsSuccessStatusCode)

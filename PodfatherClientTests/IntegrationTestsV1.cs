@@ -253,7 +253,7 @@ namespace PodfatherClientTests
             account.FirstOrDefault().Id.Should().BeGreaterThan(0);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void GetPodByJobIdAsync_PassUrlSecret_ReturnObject()
         {
             var jobId = 511651225;
@@ -265,7 +265,7 @@ namespace PodfatherClientTests
             pod.Job.Should().Be(jobId);
             pod.CosmeticId.Should().BeGreaterThan(0);
             pod.Id.Should().Be(expectedPodId);
-        }
+        }*/
 
         [TestMethod]
         public void GetPodsPdfAsync_PassUrlSecret_ReturnObject()
@@ -299,6 +299,36 @@ namespace PodfatherClientTests
                         Quantity = 1
                     }
                 },
+                Fields = new Dictionary<string, string>()
+            };
+
+            testJob.Fields.Add("Despatch Note Number", "TestValue");
+
+            var client = new PodfatherClientV1(GetAPIKey());
+            client.SetLogger(GetLogger());
+
+            var result = Task.Run(async () => await client.CreateJobAsync(testJob).ConfigureAwait(false)).Result;
+            result.Job.Job.Id.Should().BeGreaterThan(0);
+            result.JobFields.JobFieldsData.FirstOrDefault().Name.Should().Be("Despatch Note Number");
+            result.JobFields.JobFieldsData.FirstOrDefault().Value.Should().Be("TestValue");
+
+            var deleteResult = Task.Run(async () => await client.DeleteJobAsync(result.Job.Job.Id).ConfigureAwait(false)).Result;
+            deleteResult.Should().BeTrue();
+
+        }
+
+        [TestMethod]
+        public void CreateJobAsyncDateTrunc_PassObject_ShouldNotThrowException()
+        {
+            var testJob = new NewJob()
+            {
+                Customer = 13364055, // WIND ROSE AVIATION COMPANY LTD
+                Depot = 39645, // Test Depot
+                Site = 66090015, // WIND ROSE AVIATION COMPANY LTD
+                Instructions1 = "Integration Test Please Ignore",
+                Template = 1594, // AJW DELIVERY ORDER
+                DueBy = DateTime.Parse("2021-01-10T12:00:00"),
+                Items = new List<NewJobItemsData>(),
                 Fields = new Dictionary<string, string>()
             };
 
