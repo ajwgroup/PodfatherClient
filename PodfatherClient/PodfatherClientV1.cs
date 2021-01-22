@@ -237,6 +237,26 @@ namespace PodfatherClient
             }
         }
 
+        public async Task<CreatedRun> CreateRunAsync(NewRun run)
+        {
+            using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
+            {
+                String json = JsonConvert.SerializeObject(run, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssZ" });
+                HttpResponseMessage responseMessage = await client.PostAsync("/v1/runs", new StringContentWithoutCharset(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var responseJson = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    return JsonConvert.DeserializeObject<CreatedRun>(responseJson);
+                }
+                else
+                {
+                    LogDebug("CreateRunAsync|Received response code: " + responseMessage.StatusCode);
+                    throw new HttpResponseException(responseMessage);
+                }
+            }
+        }
+
         public async Task<Site> CreateSiteAsync(NewSite newSite)
         {
             using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))

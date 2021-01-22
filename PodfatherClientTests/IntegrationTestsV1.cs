@@ -346,5 +346,49 @@ namespace PodfatherClientTests
             deleteResult.Should().BeTrue();
 
         }
+
+        [TestMethod]
+        public void CreateRunAsyncDateTrunc_PassObject_ShouldNotThrowException()
+        {
+            var client = new PodfatherClientV1(GetAPIKey());
+            client.SetLogger(GetLogger());
+
+            var testRun = new NewRun()
+            {
+                Date = DateTime.Parse("2021-01-10T12:00:00"),
+                Depot = 39645,
+                Driver = 367665, // Test System Driver,
+                Name = Guid.NewGuid().ToString()
+            };
+
+            var runResult = Task.Run(async () => await client.CreateRunAsync(testRun).ConfigureAwait(false)).Result;
+            runResult.Data.Id.Should().BeGreaterThan(0);
+
+            var testJob = new NewJob()
+            {
+                Customer = 13364055, // WIND ROSE AVIATION COMPANY LTD
+                Depot = 39645, // Test Depot
+                Site = 66090015, // WIND ROSE AVIATION COMPANY LTD
+                Instructions1 = "Integration Test Please Ignore",
+                Template = 1594, // AJW DELIVERY ORDER
+                DueBy = DateTime.Parse("2021-01-10T12:00:00"),
+                Items = new List<NewJobItemsData>(),
+                Fields = new Dictionary<string, string>(),
+                Run = runResult.Data.Id
+            };
+
+            testJob.Fields.Add("Despatch Note Number", "TestValue");
+
+            var result = Task.Run(async () => await client.CreateJobAsync(testJob).ConfigureAwait(false)).Result;
+            result.Job.Job.Id.Should().BeGreaterThan(0);
+            result.JobFields.JobFieldsData.FirstOrDefault().Name.Should().Be("Despatch Note Number");
+            result.JobFields.JobFieldsData.FirstOrDefault().Value.Should().Be("TestValue");
+
+            Console.WriteLine($"Job Id: {result.Job.Job.Id} Run Id: {runResult.Data.Id}");
+
+            var deleteResult = Task.Run(async () => await client.DeleteJobAsync(result.Job.Job.Id).ConfigureAwait(false)).Result;
+            deleteResult.Should().BeTrue();
+
+        }
     }
 }
