@@ -249,23 +249,23 @@ namespace PodfatherClientTests
             var client = new PodfatherClientV1(GetAPIKey());
             client.SetLogger(GetLogger());
 
-            var account = Task.Run(async () => await client.GetPodsAsync().ConfigureAwait(false)).Result;
+            var account = Task.Run(async () => await client.GetPodsAsync(DateTime.Parse("2020-09-20T00:00:00Z"), DateTime.Parse("2020-09-20T23:59:00Z")).ConfigureAwait(false)).Result;
             account.FirstOrDefault().Id.Should().BeGreaterThan(0);
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void GetPodByJobIdAsync_PassUrlSecret_ReturnObject()
         {
-            var jobId = 511651225;
-            var expectedPodId = 293450275;
+            var jobId = 501646735;
+            var expectedPodId = 271804675;
 
             var client = new PodfatherClientV1(GetAPIKey());
             client.SetLogger(GetLogger());
-            var pod = Task.Run(async () => await client.GetPodByJobIdAsync(jobId).ConfigureAwait(false)).Result;
+            var pod = Task.Run(async () => await client.GetPodByJobIdAsync(jobId, DateTime.Parse("2020-09-20T00:00:00Z"), DateTime.Parse("2020-09-20T23:59:00Z")).ConfigureAwait(false)).Result;
             pod.Job.Should().Be(jobId);
             pod.CosmeticId.Should().BeGreaterThan(0);
             pod.Id.Should().Be(expectedPodId);
-        }*/
+        }
 
         [TestMethod]
         public void GetPodsPdfAsync_PassUrlSecret_ReturnObject()
@@ -273,7 +273,7 @@ namespace PodfatherClientTests
             var client = new PodfatherClientV1(GetAPIKey());
             client.SetLogger(GetLogger());
 
-            var pods = Task.Run(async () => await client.GetPodsAsync().ConfigureAwait(false)).Result;
+            var pods = Task.Run(async () => await client.GetPodsAsync(DateTime.Parse("2020-09-20T00:00:00Z"), DateTime.Parse("2020-09-20T23:59:00Z")).ConfigureAwait(false)).Result;
             var cosmeticId = pods.FirstOrDefault(e => e.CosmeticId > 0).CosmeticId;
             var pdf = Task.Run(async () => await client.GetPodsPdfAsync(cosmeticId).ConfigureAwait(false)).Result;
             pdf.GetBytes().Length.Should().BeGreaterThan(0);

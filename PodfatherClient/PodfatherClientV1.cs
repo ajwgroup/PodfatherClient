@@ -83,6 +83,25 @@ namespace PodfatherClient
             }
         }
 
+        public async Task<List<Pod>> GetPodsAsync(DateTime dateFrom, DateTime dateTo)
+        {
+            using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
+            {
+                HttpResponseMessage responseMessage = await client.GetAsync($"/v1/pods?dateFrom={dateFrom.ToString("yyyy-MM-dd'T'HH:mm:ssZ")}&dateTo={dateTo.ToString("yyyy-MM-dd'T'HH:mm:ssZ")}").ConfigureAwait(false);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var responseJson = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    return JsonConvert.DeserializeObject<PodsContainer>(responseJson).Pods;
+                }
+                else
+                {
+                    LogDebug("GetPodsAsync|Received response code: " + responseMessage.StatusCode);
+                    throw new HttpResponseException(responseMessage);
+                }
+            }
+        }
+
         public async Task<Customer> GetCustomerAsync(long customerId)
         {
             using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
@@ -170,6 +189,25 @@ namespace PodfatherClient
             using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
             {
                 HttpResponseMessage responseMessage = await client.GetAsync(String.Format("/v1/pods?job={0}",jobId)).ConfigureAwait(false);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var responseJson = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    return JsonConvert.DeserializeObject<PodsContainer>(responseJson).Pods.FirstOrDefault();
+                }
+                else
+                {
+                    LogDebug("GetPodByJobIdAsync|Received response code: " + responseMessage.StatusCode);
+                    throw new HttpResponseException(responseMessage);
+                }
+            }
+        }
+
+        public async Task<Pod> GetPodByJobIdAsync(long jobId, DateTime dateFrom, DateTime dateTo)
+        {
+            using (var client = HttpClientFactory.CreateClient(serviceUri, accessKey))
+            {
+                HttpResponseMessage responseMessage = await client.GetAsync(String.Format($"/v1/pods?job={jobId}&dateFrom={dateFrom.ToString("yyyy-MM-dd'T'HH:mm:ssZ")}&dateTo={dateTo.ToString("yyyy-MM-dd'T'HH:mm:ssZ")}")).ConfigureAwait(false);
 
                 if (responseMessage.IsSuccessStatusCode)
                 {
